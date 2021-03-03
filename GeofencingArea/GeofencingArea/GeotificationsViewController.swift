@@ -26,7 +26,7 @@ class GeotificationsViewController: UIViewController {
     
     //Zoom to user location with radius: 2000 km
     if let userLocation = clLocationManager.location?.coordinate {
-        let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
+        let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(viewRegion, animated: false)
     }
 
@@ -39,7 +39,7 @@ class GeotificationsViewController: UIViewController {
     if segue.identifier == "addGeotification",
       let navigationController = segue.destination as? UINavigationController,
       let addVC = navigationController.viewControllers.first as? AddNewGeotificationViewController {
-        
+      addVC.modalPresentationStyle = .fullScreen
       addVC.delegate = self
         
       if let userLocation = clLocationManager.location?.coordinate {

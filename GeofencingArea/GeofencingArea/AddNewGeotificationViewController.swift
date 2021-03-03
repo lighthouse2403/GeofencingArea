@@ -15,7 +15,6 @@ protocol AddNewGeotificationViewControllerDelegate: class {
 class AddNewGeotificationViewController: UITableViewController {
     @IBOutlet var addButton: UIBarButtonItem!
     @IBOutlet var zoomButton: UIBarButtonItem!
-    @IBOutlet weak var eventTypeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var radiusTextField: UITextField!
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var wifiNameTextfield: UITextField!
@@ -33,11 +32,12 @@ class AddNewGeotificationViewController: UITableViewController {
     
     //Zoom to user location with radius: 2000 km
     if let userLocation = self.firstUserCoordinate {
-        let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
+        let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 1000, longitudinalMeters: 1000)
         mapView.setRegion(viewRegion, animated: false)
     }
   }
 
+    
   @IBAction func textFieldEditingChanged(sender: UITextField) {
     let radiusSet = !(radiusTextField.text?.isEmpty ?? true)
     let noteSet = !(noteTextField.text?.isEmpty ?? true)
@@ -53,7 +53,7 @@ class AddNewGeotificationViewController: UITableViewController {
     let radius      = Double(radiusTextField.text ?? "") ?? 0
     let identifier  = NSUUID().uuidString
     let note        = noteTextField.text ?? ""
-    let eventType: GeotificationHandler.EventType = (eventTypeSegmentedControl.selectedSegmentIndex == 0) ? .onEntry : .onExit
+    let eventType: GeotificationHandler.EventType = .onEntry
     let wifi = self.wifiNameTextfield.text ?? ""
     let geotification = GeotificationHandler(
       coordinate: coordinate,
