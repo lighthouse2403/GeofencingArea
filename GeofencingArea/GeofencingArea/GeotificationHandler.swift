@@ -16,7 +16,7 @@ class GeotificationHandler: NSObject, Codable, MKAnnotation {
   }
 
   enum CodingKeys: String, CodingKey {
-    case latitude, longitude, radius, identifier, note, eventType
+    case latitude, longitude, radius, identifier, note, eventType, wifiName
   }
 
   var coordinate: CLLocationCoordinate2D
@@ -24,6 +24,7 @@ class GeotificationHandler: NSObject, Codable, MKAnnotation {
   var identifier: String
   var note: String
   var eventType: EventType
+  var wifiName: String
 
   var title: String? {
     if note.isEmpty {
@@ -45,12 +46,13 @@ class GeotificationHandler: NSObject, Codable, MKAnnotation {
     radius = min(radius, maxRadius)
   }
 
-  init(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String, note: String, eventType: EventType) {
+    init(coordinate: CLLocationCoordinate2D, radius: CLLocationDistance, identifier: String, note: String, eventType: EventType, wifiName: String) {
     self.coordinate = coordinate
-    self.radius = radius
+    self.radius     = radius
     self.identifier = identifier
-    self.note = note
-    self.eventType = eventType
+    self.note       = note
+    self.eventType  = eventType
+    self.wifiName   = wifiName
   }
 
   // MARK: Codable
@@ -64,6 +66,7 @@ class GeotificationHandler: NSObject, Codable, MKAnnotation {
     note = try values.decode(String.self, forKey: .note)
     let event = try values.decode(String.self, forKey: .eventType)
     eventType = EventType(rawValue: event) ?? .onEntry
+    wifiName = try values.decode(String.self, forKey: .wifiName)
   }
 
   func encode(to encoder: Encoder) throws {
@@ -74,6 +77,7 @@ class GeotificationHandler: NSObject, Codable, MKAnnotation {
     try container.encode(identifier, forKey: .identifier)
     try container.encode(note, forKey: .note)
     try container.encode(eventType.rawValue, forKey: .eventType)
+    try container.encode(wifiName, forKey: .wifiName)
   }
 }
 
@@ -92,13 +96,11 @@ extension GeotificationHandler {
 // MARK: - Notification Region
 extension GeotificationHandler {
   var region: CLCircularRegion {
-    // 1
     let region = CLCircularRegion(
       center: coordinate,
       radius: radius,
       identifier: identifier)
 
-    // 2
     region.notifyOnEntry = (eventType == .onEntry)
     region.notifyOnExit = !region.notifyOnEntry
     return region

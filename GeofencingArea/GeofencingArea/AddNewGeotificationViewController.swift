@@ -20,7 +20,7 @@ class AddNewGeotificationViewController: UITableViewController {
     @IBOutlet weak var noteTextField: UITextField!
     @IBOutlet weak var wifiNameTextfield: UITextField!
     @IBOutlet weak var mapView: MKMapView!
-    
+    var firstUserCoordinate: CLLocationCoordinate2D?
     weak var delegate: AddNewGeotificationViewControllerDelegate?
 
   override func viewDidLoad() {
@@ -29,6 +29,12 @@ class AddNewGeotificationViewController: UITableViewController {
     addButton.isEnabled = false
     if let firstName = WifiHandler.getSSIDs().first {
         self.wifiNameTextfield.text = firstName
+    }
+    
+    //Zoom to user location with radius: 2000 km
+    if let userLocation = self.firstUserCoordinate {
+        let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
+        mapView.setRegion(viewRegion, animated: false)
     }
   }
 
@@ -43,17 +49,20 @@ class AddNewGeotificationViewController: UITableViewController {
   }
 
   @IBAction private func onAdd(sender: AnyObject) {
-    let coordinate = mapView.centerCoordinate
-    let radius = Double(radiusTextField.text ?? "") ?? 0
-    let identifier = NSUUID().uuidString
-    let note = noteTextField.text ?? ""
+    let coordinate  = mapView.centerCoordinate
+    let radius      = Double(radiusTextField.text ?? "") ?? 0
+    let identifier  = NSUUID().uuidString
+    let note        = noteTextField.text ?? ""
     let eventType: GeotificationHandler.EventType = (eventTypeSegmentedControl.selectedSegmentIndex == 0) ? .onEntry : .onExit
+    let wifi = self.wifiNameTextfield.text ?? ""
     let geotification = GeotificationHandler(
       coordinate: coordinate,
       radius: radius,
       identifier: identifier,
       note: note,
-      eventType: eventType)
+      eventType: eventType,
+      wifiName: wifi
+    )
     delegate?.addGeotificationViewController(self, didAddGeotification: geotification)
   }
 

@@ -24,6 +24,12 @@ class GeotificationsViewController: UIViewController {
     self.clLocationManager.delegate = self
     self.clLocationManager.requestAlwaysAuthorization()
     
+    //Zoom to user location with radius: 2000 km
+    if let userLocation = clLocationManager.location?.coordinate {
+        let viewRegion = MKCoordinateRegion(center: userLocation, latitudinalMeters: 2000, longitudinalMeters: 2000)
+        mapView.setRegion(viewRegion, animated: false)
+    }
+
     // Load all geotifictions
     self.loadAllGeotifications()
   }
@@ -33,7 +39,12 @@ class GeotificationsViewController: UIViewController {
     if segue.identifier == "addGeotification",
       let navigationController = segue.destination as? UINavigationController,
       let addVC = navigationController.viewControllers.first as? AddNewGeotificationViewController {
+        
       addVC.delegate = self
+        
+      if let userLocation = clLocationManager.location?.coordinate {
+        addVC.firstUserCoordinate = userLocation
+      }
     }
   }
 
@@ -122,18 +133,32 @@ class GeotificationsViewController: UIViewController {
         self.clLocationManager.stopMonitoring(for: circularRegion)
     }
   }
+    
+    func addNewGeotification(geotification: GeotificationHandler) {
+        geotification.clampRadius(maxRadius:
+          clLocationManager.maximumRegionMonitoringDistance)
+        self.add(geotification)
+        self.startMonitoring(geotification: geotification)
+        self.saveAllGeotifications()
+    }
 }
 
 // MARK: AddGeotificationViewControllerDelegate
 extension GeotificationsViewController: AddNewGeotificationViewControllerDelegate {
   func addGeotificationViewController(_ controller: AddNewGeotificationViewController, didAddGeotification geotification: GeotificationHandler) {
     controller.dismiss(animated: true, completion: nil)
-
-    geotification.clampRadius(maxRadius:
-      clLocationManager.maximumRegionMonitoringDistance)
-    self.add(geotification)
-    self.startMonitoring(geotification: geotification)
-    self.saveAllGeotifications()
+    
+    // Remove old geotification
+    self.geotifications.forEach({remove($0)})
+    let currentWifiName = WifiHandler.getSSIDs().first ?? ""
+    if geotification.wifiName.count == 0 {
+        // Add new geotification
+        self.addNewGeotification(geotification: geotification)
+    } else if currentWifiName == geotification.wifiName {
+        self.addNewGeotification(geotification: geotification)
+    } else {
+        self.showAlert(withTitle: "Warning", message: "Outside of the zone")
+    }
   }
 }
 
