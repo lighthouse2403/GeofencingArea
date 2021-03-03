@@ -13,19 +13,23 @@ protocol AddNewGeotificationViewControllerDelegate: class {
 }
 
 class AddNewGeotificationViewController: UITableViewController {
-  @IBOutlet var addButton: UIBarButtonItem!
-  @IBOutlet var zoomButton: UIBarButtonItem!
-  @IBOutlet weak var eventTypeSegmentedControl: UISegmentedControl!
-  @IBOutlet weak var radiusTextField: UITextField!
-  @IBOutlet weak var noteTextField: UITextField!
-  @IBOutlet weak var mapView: MKMapView!
-
-  weak var delegate: AddNewGeotificationViewControllerDelegate?
+    @IBOutlet var addButton: UIBarButtonItem!
+    @IBOutlet var zoomButton: UIBarButtonItem!
+    @IBOutlet weak var eventTypeSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var radiusTextField: UITextField!
+    @IBOutlet weak var noteTextField: UITextField!
+    @IBOutlet weak var wifiNameTextfield: UITextField!
+    @IBOutlet weak var mapView: MKMapView!
+    
+    weak var delegate: AddNewGeotificationViewControllerDelegate?
 
   override func viewDidLoad() {
     super.viewDidLoad()
     navigationItem.rightBarButtonItems = [addButton, zoomButton]
     addButton.isEnabled = false
+    if let firstName = WifiHandler.getSSIDs().first {
+        self.wifiNameTextfield.text = firstName
+    }
   }
 
   @IBAction func textFieldEditingChanged(sender: UITextField) {

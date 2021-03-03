@@ -4,7 +4,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Image references" minToolsVersion="12.0"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -85,7 +84,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <color key="barTintColor" name="rw-green"/>
+                        <color key="barTintColor" red="1" green="0.49327188729999999" blue="0.47399842739999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="FtV-lr-b9I" kind="relationship" relationship="rootViewController" id="yTU-0m-L4f"/>
@@ -102,12 +101,12 @@
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="dw0-D4-bRb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="4cR-mq-xY6">
-                            <rect key="frame" x="0.0" y="444" width="414" height="0.0"/>
+                            <rect key="frame" x="0.0" y="490" width="414" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <sections>
                             <tableViewSection id="asB-6J-I4h">
@@ -167,8 +166,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100" placeholder="Radius in meters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N85-OM-I6J">
-                                                    <rect key="frame" x="86" y="17" width="293" height="13"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="100 meters" placeholder="Radius in meters" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="N85-OM-I6J">
+                                                    <rect key="frame" x="116" y="17" width="263" height="13"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
                                                     <connections>
@@ -176,7 +175,10 @@
                                                     </connections>
                                                 </textField>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zCD-ag-F9f">
-                                                    <rect key="frame" x="26" y="16" width="50" height="13"/>
+                                                    <rect key="frame" x="26" y="16" width="80" height="13"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="80" id="gbP-cM-ixa"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -192,35 +194,61 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="OWI-4W-58k">
-                                        <rect key="frame" x="0.0" y="372" width="414" height="44"/>
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="90" id="OWI-4W-58k">
+                                        <rect key="frame" x="0.0" y="372" width="414" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OWI-4W-58k" id="T3K-1r-byy">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Reminder note to be shown" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SA6-Me-YVE">
-                                                    <rect key="frame" x="86.5" y="16" width="292.5" height="19.5"/>
+                                                    <rect key="frame" x="125" y="13" width="254" height="19.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                     <connections>
                                                         <action selector="textFieldEditingChangedWithSender:" destination="FtV-lr-b9I" eventType="editingChanged" id="VgP-tm-PFv"/>
                                                     </connections>
                                                 </textField>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Note" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aZ-Jf-UoY">
-                                                    <rect key="frame" x="26" y="16" width="35.5" height="13"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Location" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1aZ-Jf-UoY">
+                                                    <rect key="frame" x="20" y="0.0" width="80" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="fa6-kA-Wgy"/>
+                                                        <constraint firstAttribute="width" constant="80" id="hdq-hQ-PFi"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                     <color key="textColor" systemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wifi name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tmB-to-McM">
+                                                    <rect key="frame" x="20" y="45" width="80" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="utB-Y3-xZb"/>
+                                                        <constraint firstAttribute="width" constant="80" id="wRQ-2e-lXV"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="wifi name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5BV-HQ-ZRr">
+                                                    <rect key="frame" x="110" y="50.5" width="294" height="34"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="FtV-lr-b9I" id="SfZ-wh-u9g"/>
+                                                    </connections>
+                                                </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="SA6-Me-YVE" firstAttribute="top" secondItem="T3K-1r-byy" secondAttribute="topMargin" constant="5" id="5Dq-5s-zHi"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="1aZ-Jf-UoY" secondAttribute="bottom" constant="4" id="O7W-oD-P36"/>
+                                                <constraint firstItem="SA6-Me-YVE" firstAttribute="centerY" secondItem="1aZ-Jf-UoY" secondAttribute="centerY" id="98G-Xm-3ps"/>
+                                                <constraint firstAttribute="trailing" secondItem="5BV-HQ-ZRr" secondAttribute="trailing" constant="10" id="E2c-O0-QIz"/>
+                                                <constraint firstItem="5BV-HQ-ZRr" firstAttribute="centerY" secondItem="tmB-to-McM" secondAttribute="centerY" id="HeG-di-Ckt"/>
+                                                <constraint firstItem="5BV-HQ-ZRr" firstAttribute="leading" secondItem="tmB-to-McM" secondAttribute="trailing" constant="10" id="QFM-eC-Qs6"/>
+                                                <constraint firstItem="tmB-to-McM" firstAttribute="top" secondItem="1aZ-Jf-UoY" secondAttribute="bottom" id="QtY-L4-rfY"/>
                                                 <constraint firstItem="SA6-Me-YVE" firstAttribute="leading" secondItem="1aZ-Jf-UoY" secondAttribute="trailing" constant="25" id="VKt-f7-Bum"/>
-                                                <constraint firstItem="1aZ-Jf-UoY" firstAttribute="leading" secondItem="T3K-1r-byy" secondAttribute="leadingMargin" constant="6" id="eP2-XD-ce7"/>
-                                                <constraint firstItem="1aZ-Jf-UoY" firstAttribute="top" secondItem="T3K-1r-byy" secondAttribute="topMargin" constant="5" id="fje-au-vm1"/>
+                                                <constraint firstItem="tmB-to-McM" firstAttribute="leading" secondItem="T3K-1r-byy" secondAttribute="leading" constant="20" id="WSf-Ib-nfu"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="SA6-Me-YVE" secondAttribute="trailing" constant="15" id="hOs-4w-BIJ"/>
+                                                <constraint firstItem="1aZ-Jf-UoY" firstAttribute="leading" secondItem="T3K-1r-byy" secondAttribute="leading" constant="20" id="xoP-DJ-STs"/>
+                                                <constraint firstItem="1aZ-Jf-UoY" firstAttribute="top" secondItem="T3K-1r-byy" secondAttribute="top" id="ypv-hS-dKP"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -257,6 +285,7 @@
                         <outlet property="mapView" destination="e6O-1h-Q0u" id="aPM-lv-qDt"/>
                         <outlet property="noteTextField" destination="SA6-Me-YVE" id="znc-Rr-SYi"/>
                         <outlet property="radiusTextField" destination="N85-OM-I6J" id="ZlD-B8-v3T"/>
+                        <outlet property="wifiNameTextfield" destination="5BV-HQ-ZRr" id="aWB-ir-RRY"/>
                         <outlet property="zoomButton" destination="6AW-jC-BsQ" id="etF-3W-th6"/>
                     </connections>
                 </tableViewController>
@@ -268,9 +297,6 @@
     <resources>
         <image name="location.fill.viewfinder" catalog="system" width="128" height="115"/>
         <image name="mappin" catalog="system" width="105" height="128"/>
-        <namedColor name="rw-green">
-            <color red="0.32899999618530273" green="0.32400000095367432" blue="0.4779999852180481" alpha="0.33000001311302185" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
